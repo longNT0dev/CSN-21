@@ -11,3 +11,10 @@
 Hệ thập phân (cơ số 10): 0 - 9 % 2
 Hệ nhị phân (cơ số 2): 0 - 1
 Hệ thập lục phân (cơ số 16): 0 - 9, (10 - 15) => A, B, C, D, E, F % 16
+
+
+BTVN: Cài dặt thuật toán đệ quy
+1. Kiểm tra 1 mảng có phải mảng đối xứng không (điều kiện nếu số phần tử của mảng là chẵn)
+Ví dụ: [1,2,3,3,2,1] là mảng đối xứng
+2. Tính tổng bình phương S(n) = 12 + 22 + 32 + ... + n2
+
