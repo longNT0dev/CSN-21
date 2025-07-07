@@ -4,6 +4,10 @@ Nhiệm vụ của bạn là làm sao tốn tổng số đạn ít nhất để 
 
 2. Trong cửa hàng có n viên kẹo, viên kẹo thứ i có giá tiền là p[i] và độ ngọt là h[i]. Bạn có tối đa m tiền trong túi, hãy dùng số tiền đó một cách khéo léo để mua kẹo trong cửa hàng, sao cho tổng độ ngọt của tất cả viên kẹo bạn mua là lớn nhất có thể.
 
+dp[j - p[i]] + h[i] j(m => 0)
+=> Nếu trước đó tôi đã tiêu hết j - p[i] tiền và đạt được độ ngọt là dp[j - p[i]], thì nếu bây giờ tôi bỏ thêm p[i] tiền để mua thêm viên kẹo thứ i, tôi sẽ đạt tổng độ ngọt là dp[j - p[i]] + h[i]
+
+
 3. Ở thành phố nơi bạn sống vừa mới khai trương một rạp chiếu phim lớn. Hôm nay, rạp sẽ chiếu n bộ phim theo khung giờ cố định, bộ phim thứ i sẽ chiếu vào khung giờ t[i-1] đến t[i]. Trước khi xem bất kỳ bộ phim nào, bạn phải mua vé xem bộ phim ấy, có hai loại vé cho bạn lựa chọn:
 
 Vé loại 1: Vé xem phim với giá p[i] tương ứng cho bộ phim thứ i.
@@ -14,7 +18,7 @@ Nhiệm vụ của bạn là tính số tiền tối ưu nhất phải trả cho
 
 Ví dụ , rạp chiếu 3 bộ phim với các khung giờ t=[0,10,20,30], giá vé của các bộ phim là p=[40,50,60]. Bộ phim thứ nhất và thứ hai bạn dùng vé loại 1 là tối ưu nhất, số tiền bạn phải trả là 40,50. Bộ phim thứ ba bạn dùng vé loại hai là tối ưu nhất, vì trước đó bạn đã trả 40 + 50 = 90 rồi, nên bạn chỉ cần trả thêm 10 đô nữa là có vé loại 2 với thời lượng 180 phút, thời lượng này lớn hơn thời lượng của những bộ phim gần nhất nên vé này hợp lệ.
 
-
+dp[i] = min(dp[i], dp[j - 1] + 100) j (i => 0)
 
 
 s(7) = {8,6,1,3,7,10} 20} 
