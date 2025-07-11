@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 46
+      var permute = function (nums) {
+        const res = [];
+
+        const backtrack = (path, used) => {
+          // In ra kết quả khi độ dài mảng ban đầu và mảng sinh ra bằng nhau
+          if (path.length === nums.length) {
+            res.push([...path]); // lưu kết quả
+            return;
+          }
+
+          for (let i = 0; i < nums.length; i++) {
+            if (used[i]) continue;
+
+            // Chọn
+            used[i] = true;
+            path.push(nums[i]);
+
+            // Đệ quy
+            backtrack(path, used);
+
+            // Quay lui
+            path.pop();
+            used[i] = false;
+          }
+        };
+
+        // bắt đầu từ mảng rỗng, chưa dùng gì
+        backtrack([], Array(nums.length).fill(false));
+        return res;
+      };
+
+      // 1823
+      var findTheWinner = function (n, k) {
+        // Khởi tạo danh sách người chơi
+        const people = Array.from({ length: n }, (_, i) => i + 1);
+
+        function eliminate(people, startIndex) {
+          // Nếu chỉ còn 1 người, họ là người thắng
+          if (people.length === 1) return people[0];
+
+          // Tính chỉ số người bị loại
+          const eliminatedIndex = (startIndex + k - 1) % people.length;
+          // Xoá người bị loại
+          people.splice(eliminatedIndex, 1);
+
+          // Gọi đệ quy với danh sách mới và vị trí bắt đầu mới
+          return eliminate(people, eliminatedIndex % people.length);
+        }
+
+        return eliminate(people, 0);
+      };
+
+      // 11
+      var maxArea = function (height) {
+        let left = 0;
+        let right = height.length - 1;
+        let maxWater = 0;
+
+        while (left < right) {
+          const h = Math.min(height[left], height[right]);
+          const w = right - left;
+          const area = h * w;
+          maxWater = Math.max(maxWater, area);
+
+          // Tham lam: bỏ chiều cao thấp hơn
+          if (height[left] < height[right]) {
+            left++;
+          } else {
+            right--;
+          }
+        }
+
+        return maxWater;
+      };
+
+      // 121
+      var maxProfit = function (prices) {
+        let minPrice = prices[0];
+        let maxProfit = 0;
+
+        for (let i = 1; i < prices.length; i++) {
+          minPrice = Math.min(minPrice, prices[i]); // giá mua tốt nhất đến hiện tại
+          maxProfit = Math.max(maxProfit, prices[i] - minPrice); // lời tối đa nếu bán hôm nay
+        }
+
+        return maxProfit;
+      };
+
+      // 122
+      var maxProfit = function (prices) {
+        const n = prices.length;
+        if (n === 0) return 0;
+
+        // dp[i][0] = không giữ cổ phiếu tại ngày i
+        // dp[i][1] = giữ cổ phiếu tại ngày i
+        const dp = Array.from({ length: n }, () => [0, 0]);
+
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0]; // mua cổ phiếu ngày 0
+
+        for (let i = 1; i < n; i++) {
+          // không giữ cổ phiếu hôm nay: hoặc giữ nguyên, hoặc bán hôm nay
+          dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+
+          // giữ cổ phiếu hôm nay: hoặc giữ nguyên, hoặc mua hôm nay
+          dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+        }
+
+        // Trả về lợi nhuận khi kết thúc mà không giữ cổ phiếu (đã bán hết)
+        return dp[n - 1][0];
+      };
+    </script>
+  </body>
+</html>
